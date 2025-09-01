@@ -11,6 +11,7 @@ import com.banking.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class AccountService {
         account.setAccountHolderName(request.getAccountHolderName());
         account.setEmail(request.getEmail());
         account.setPhoneNumber(request.getPhoneNumber());
-        account.setAccountType(request.getAccountType());
+        account.setAccountType(Account.AccountType.valueOf(request.getAccountType()));
         account.setBalance(request.getInitialDeposit() != null ?
                 request.getInitialDeposit() : BigDecimal.ZERO);
 
@@ -190,15 +191,6 @@ public class AccountService {
     }
 
     private TransactionDTO convertTransactionToDTO(Transaction transaction) {
-        TransactionDTO dto = new TransactionDTO();
-        dto.setId(transaction.getId());
-        dto.setTransactionId(transaction.getTransactionId());
-        dto.setTransactionType(transaction.getTransactionType());
-        dto.setAmount(transaction.getAmount());
-        dto.setBalanceAfterTransaction(transaction.getBalanceAfterTransaction());
-        dto.setDescription(transaction.getDescription());
-        dto.setTransactionDate(transaction.getTransactionDate());
-        dto.setStatus(transaction.getStatus());
-        return dto;
+        return getTransactionDTO(transaction);
     }
 }
