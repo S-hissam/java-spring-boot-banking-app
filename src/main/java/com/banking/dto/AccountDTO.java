@@ -1,6 +1,7 @@
 package com.banking.dto;
 
 
+import com.banking.entity.Account;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ public class AccountDTO {
     private String accountHolderName;
     private String email;
     private String phoneNumber;
-    private String accountType;
+    private Account.AccountType accountType;
     private BigDecimal balance;
     private Boolean isActive;
     private LocalDateTime createdAt;

@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.banking.service.TransactionService.getTransactionDTO;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -82,7 +84,7 @@ public class AccountService {
             account.setPhoneNumber(request.getPhoneNumber());
         }
         if (request.getAccountType() != null) {
-            account.setAccountType(request.getAccountType());
+            account.setAccountType(Account.AccountType.valueOf(request.getAccountType()));
         }
 
         Account updatedAccount = accountRepository.save(account);
